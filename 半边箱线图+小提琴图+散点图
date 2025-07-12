@@ -1,0 +1,52 @@
+library(Seurat)
+
+rds <- "AT.merged.annoATACRNA.rds"
+obj <- readRDS(file = rds)
+
+p1 <- ggplot(obj@meta.data, aes(orig.ident, log10(nCount_RNA))) +
+  stat_halfeye(mapping = aes(fill=orig.ident), alpha = 0.5, width = .6, .width = 0, justification = -.4, point_colour = NA) + 
+  geom_jitter(mapping = aes(color=orig.ident), alpha = .1, width = .15, size=0.05)+
+  geom_boxplot(width = .15, outlier.shape = NA,fill=NA,size=0.5) +
+  scale_fill_manual(values = c("#008EA0FF", "#8A4198FF", "#FF6F00FF", "#C71000FF")) +
+  scale_color_manual(values = c("#008EA0FF", "#8A4198FF", "#FF6F00FF", "#C71000FF")) +
+  # scale_fill_futurama() +
+  # scale_color_futurama() +
+  ylim(2.5, 4.5) +
+  theme_classic()
+p2 <- ggplot(obj@meta.data, aes(orig.ident, log10(nFeature_RNA))) +
+  stat_halfeye(mapping = aes(fill=orig.ident), alpha = 0.5, width = .6, .width = 0, justification = -.4, point_colour = NA) + 
+  geom_jitter(mapping = aes(color=orig.ident), alpha = .1, width = .15, size=0.05)+
+  geom_boxplot(width = .15, outlier.shape = NA,fill=NA,size=0.5) +
+  scale_fill_manual(values = c("#008EA0FF", "#8A4198FF", "#FF6F00FF", "#C71000FF")) +
+  scale_color_manual(values = c("#008EA0FF", "#8A4198FF", "#FF6F00FF", "#C71000FF")) +
+  # scale_fill_futurama() +
+  # scale_color_futurama() +
+  ylim(2.5, 4.5) +
+  theme_classic()
+p3 <- ggplot(obj@meta.data, aes(orig.ident, log10(nCount_ATAC))) +
+  stat_halfeye(mapping = aes(fill=orig.ident), alpha = 0.5, width = .6, .width = 0, justification = -.4, point_colour = NA) + 
+  geom_jitter(mapping = aes(color=orig.ident), alpha = .1, width = .15, size=0.05)+
+  geom_boxplot(width = .15, outlier.shape = NA,fill=NA,size=0.5) +
+  scale_fill_manual(values = c("#008EA0FF", "#8A4198FF", "#FF6F00FF", "#C71000FF")) +
+  scale_color_manual(values = c("#008EA0FF", "#8A4198FF", "#FF6F00FF", "#C71000FF")) +
+  # scale_fill_futurama() +
+  # scale_color_futurama() +
+  ylim(2.5, 4.5) +
+  theme_classic()
+p4 <- ggplot(obj@meta.data, aes(orig.ident, log10(nFeature_ATAC))) +
+  stat_halfeye(mapping = aes(fill=orig.ident), alpha = 0.5, width = .6, .width = 0, justification = -.4, point_colour = NA) + 
+  geom_jitter(mapping = aes(color=orig.ident), alpha = .1, width = .15, size=0.05)+
+  geom_boxplot(width = .15, outlier.shape = NA,fill=NA,size=0.5) +
+  scale_fill_manual(values = c("#008EA0FF", "#8A4198FF", "#FF6F00FF", "#C71000FF")) +
+  scale_color_manual(values = c("#008EA0FF", "#8A4198FF", "#FF6F00FF", "#C71000FF")) +
+  # scale_fill_futurama() +
+  # scale_color_futurama() +
+  ylim(2.5, 4.5) +
+  theme_classic()
+px2 <- plot_grid(p1, p2, p3, p4,
+               #labels = c('A', 'B', 'C', 'D'), 
+               label_size = 12,
+               nrow = 2)
+pdf("Violinbox.quality.Style2.pdf", width = 10, height = 6)
+px2
+dev.off()
