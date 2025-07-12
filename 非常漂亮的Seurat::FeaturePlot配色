@@ -1,0 +1,8 @@
+library(Seurat)
+library(viridis)
+
+genelist <- read.table("genelist.selected.txt", header = F)$V1
+rds <- readRDS("xxx.rds")
+
+
+p1 <- FeaturePlot(rds, features = genelist, pt.size = 0.1, order = T, raster = F, ncol = 5) & scale_color_viridis(option="rocket", begin = 1, end = 0.3)
