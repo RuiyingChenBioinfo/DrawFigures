@@ -6,6 +6,7 @@ The author acknowledge Dr. H.D. who pushed the author to collect all the scripts
 ## Part 1: 几大金刚R包！！可与ggplot直接对接，与scale_color_manual用法相似，谁用谁知道，谁用谁不后悔
 
 viridis (https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
+
 ggsci (https://cran.r-project.org/web/packages/ggsci/vignettes/ggsci.html)
 
 ## Part 2：我自己调理的R语言配色，这个方式适合要用很多个颜色且有lineage区别的图谱
