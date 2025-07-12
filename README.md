@@ -22,4 +22,4 @@ c(fun_color_range1(4), fun_color_range2(2), fun_color_range3(2), fun_color_range
 
 ## Part 4：多收集已发表文献里使用的颜色，直接把pdf拉到Abode Illustrator打开吸取颜色即可
 
-# Part 5：空间转录组离得近的颜色会区分不开细胞类型，这个可以用已经存在的色板+palo/spaco宝优化分布
+## Part 5：空间转录组离得近的颜色会区分不开细胞类型，这个可以用已经存在的色板+palo/spaco宝优化分布
