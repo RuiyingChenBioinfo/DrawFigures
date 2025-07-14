@@ -1,7 +1,5 @@
 library(Seurat)
-
-rds <- "AT.merged.annoATACRNA.rds"
-obj <- readRDS(file = rds)
+library(ggplot2)
 
 p1 <- ggplot(obj@meta.data, aes(orig.ident, log10(nCount_RNA))) +
   stat_halfeye(mapping = aes(fill=orig.ident), alpha = 0.5, width = .6, .width = 0, justification = -.4, point_colour = NA) + 
