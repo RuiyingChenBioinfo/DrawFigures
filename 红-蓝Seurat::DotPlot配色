@@ -1,0 +1,12 @@
+p2 <- DotPlot(
+  seurat,
+  group.by='Cell_type',
+  features = rev(mods)
+) + RotatedAxis() +
+  scale_color_gradientn(colours = colorRampPalette(c("#3dacdb","#DBDCE1","#ffa55c","#ff745c","#ba061c"))(100)) + 
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    axis.line.x = element_blank(),
+    axis.line.y = element_blank(),
+    panel.border = element_rect(colour = "black", fill=NA, size=1)
+  )
