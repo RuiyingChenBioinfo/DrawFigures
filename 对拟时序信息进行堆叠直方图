@@ -1,0 +1,15 @@
+length <- 20 # Pseudotime into 20 bins
+
+cds1 <- cds[,row.names(cds@phenoData@data)[which(cds@phenoData@data$State %in% c("5"))]] # Any state of interest
+
+meta <- cds1@phenoData@data
+newdata <- data.frame(Pseudotime = seq(min(meta$Pseudotime),max(meta$Pseudotime),length.out = (length+1)))
+meta$Column <- cut(meta$Pseudotime, breaks = newdata$Pseudotime, include.lowest = TRUE, right = T)
+cell_counts <- meta %>% group_by(Stage, Column) %>% summarise(cell_count = n())
+data <- cell_counts
+data.sum <- aggregate(data$cell_count, by = list(data$Column), sum) # View(data.sum)
+data.merge <- merge(data, data.sum, all.x = TRUE, all.y = TRUE, by.x = "Column", by.y = "Group.1")
+data.merge$Percentage <- 100*(data.merge$cell_count/data.merge$x) # 
+ggplot(data.merge, aes(x = Column, y = Percentage, fill = Stage)) + 
+  scale_y_continuous(expand = c(0, 0)) + 
+  geom_bar(stat='identity', width = 1) +  theme_classic()
