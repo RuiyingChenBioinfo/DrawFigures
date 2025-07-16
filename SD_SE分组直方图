@@ -1,0 +1,65 @@
+library(ggplot2)
+library(dplyr)
+library(readxl)
+library(ggpubr)
+
+df <- read_excel("D:/R_data_scripts/data2.xlsx")
+
+#> head(df)
+# A tibble: 6 × 4
+#  applied_force speed score Sample
+#          <dbl> <dbl> <dbl>  <dbl>
+#1            555   0.121     49      33
+#2            1055   0.341    125      44
+
+df_summary <- df %>%
+  group_by(speed, applied_force, Sample) %>%
+  summarise(
+    Mean = mean(score, na.rm = TRUE),
+    SD = sd(score, na.rm = TRUE),
+    n = n(),
+    SE = SD / sqrt(n),
+    .groups = 'drop'
+  ) %>%
+  mutate(
+    speed = as.factor(speed),
+    applied_force = as.factor(applied_force)
+  )
+
+ggplot(df_summary, aes(x = applied_force, y = Mean, fill = speed)) +
+  geom_col(position = position_dodge(width = 0.8), width = 0.7) +
+  geom_errorbar(
+    aes(ymin = Mean - SD, ymax = Mean + SD),
+    position = position_dodge(width = 0.8),
+    width = 0.2,                           
+    color = "black",
+    linewidth = 0.5
+  ) + coord_cartesian(ylim = c(-5, 18)) +
+  scale_fill_brewer(palette = "Set2") + 
+  labs(
+    title = "xxx",
+    x = "xxx",
+    y = "xxx",
+    fill = "xxx"
+  ) +
+  theme_minimal(base_size = 12) +          
+  theme(legend.position = "top")
+
+ggplot(df_summary, aes(x = applied_force, y = Mean, fill = speed)) +
+  geom_col(position = position_dodge(width = 0.8), width = 0.7) +
+  geom_errorbar(
+    aes(ymin = Mean - SE, ymax = Mean + SE),
+    position = position_dodge(width = 0.8),
+    width = 0.2,                           
+    color = "black",
+    linewidth = 0.5
+  ) + coord_cartesian(ylim = c(-5, 18)) +
+  scale_fill_brewer(palette = "Set2") + 
+  labs(
+    title = "xxx",
+    x = "xxx",
+    y = "xxx",
+    fill = "xxx"
+  ) +
+  theme_minimal(base_size = 12) +          
+  theme(legend.position = "top")
